@@ -27,10 +27,17 @@ var users = map[string]string{
 }
 
 func getHomework(c echo.Context) error {
+	tmpl, err := template.ParseFiles("submited-hw.html")
+	if err != nil {
+		return err
+	}
 	hw := c.FormValue("hw")
 	homework[hw] = false
+	info := InfoHomework{
+		Info: fmt.Sprint("subject accepted, " + hw + " is waiting for you"),
+	}
 
-	return c.String(http.StatusOK, "subject accepted, "+hw+" is waiting for you")
+	return tmpl.Execute(c.Response(), info)
 }
 
 func showHomework(c echo.Context) error {
@@ -62,7 +69,7 @@ func updateHomework(c echo.Context) error {
 		return c.String(http.StatusBadRequest, "subject doesn't exist")
 	} else {
 		homework[subject] = true
-		return c.String(http.StatusOK, "congrats! "+subject+" is completed!")
+		return c.String(http.StatusOK, subject+" is completed!")
 	}
 }
 
