@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go and HTML</title>
+</head>
+<body>
+    <h1>Homework to do</h1>
+
+    <form action="/hw-show" method="GET">
+        <button type="submit">Get Info</button>
+    </form><br>
+
+    <pre>
+    {{.Info}}
+    </pre><br>
+
+    <form action="/submit" method="POST">
+        <label for="name">Add subject:</label>
+        <input type="text" id="hw" name="hw"><br><br>
+        
+        <input type="submit" value="Submit subject">
+    </form>
+</body>
+</html>
